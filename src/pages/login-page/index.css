@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+.login-card {
+  top: 50%;
+  margin: 0;
+  position: relative;
+  -ms-transform: translateX(170%);
+  transform: translateX(170%);
+}
+
+.card {
+  box-shadow: 3px 3px 3px 3px rgb(224, 224, 224);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.separator {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border: 1px solid whitesmoke;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: "space-evenly";
+}
+.action-buttons > Button {
+  border-radius: 10px;
+  height: 50px;
+  width: 300px;
+}
+.action-buttons-text {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "DM Sans", sans-serif;
+}
