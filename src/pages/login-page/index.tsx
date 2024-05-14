@@ -1,4 +1,4 @@
-import { Button, Card, Form } from "antd"
+import { Button, Card, Col, Form, Row } from "antd"
 import { useState } from "react"
 import InputText from "../../components/form/input-text"
 import { openNotification } from "../../components/notification/notification"
@@ -82,63 +82,65 @@ function LoginIndex() {
 
   return (
     <>
-      <div>
+      <div className="naasp-logo">
         <img
           src="src/assets/naasp.png"
           alt="naasp-logo"
           style={{ width: "300px", height: "150px" }}
         />
       </div>
-      <div className="login-card">
-        <Card className="card">
-          <p className="title">Login</p>
-          <Form form={form} onFinish={handleLogin}>
-            <InputText
-              placeholder="E-mail"
-              name="email"
-              type="email"
-              required
-            />
-            <InputText
-              placeholder="Senha"
-              name="password"
-              maxLength={6}
-              password
-              required
-            />
+      <Row align={"middle"}>
+        <Col>
+          <Card className="card">
+            <p className="title">Login</p>
+            <Form form={form} onFinish={handleLogin}>
+              <InputText
+                placeholder="E-mail"
+                name="email"
+                type="email"
+                required
+              />
+              <InputText
+                placeholder="Senha"
+                name="password"
+                maxLength={6}
+                password
+                required
+              />
 
-            <hr className="separator" />
+              <hr className="separator" />
 
-            <button
-              style={{
-                backgroundColor: "white",
-                color: "black",
-                marginBottom: "20px",
-              }}
-              onClick={() => <ForgotPasswordIndex />}
-            >
-              Esqueceu sua senha?
-            </button>
-
-            <div className="action-buttons">
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={isLoading}
-                loading={isLoading}
+              <button
+                style={{
+                  backgroundColor: "white",
+                  color: "black",
+                  marginBottom: "20px",
+                }}
+                onClick={() => <ForgotPasswordIndex />}
               >
-                <span className="action-buttons-text">
-                  {isLoading ? "Entrando..." : "Entrar"}
-                </span>
-              </Button>
-              <br />
-              <Button htmlType="button" onClick={handleOnRestet}>
-                <span className="action-buttons-text">Limpar</span>
-              </Button>
-            </div>
-          </Form>
-        </Card>
-      </div>
+                Esqueceu sua senha?
+              </button>
+
+              <div className="action-buttons">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={isLoading}
+                  loading={isLoading}
+                >
+                  <span className="action-buttons-text">
+                    {isLoading ? "Entrando..." : "Entrar"}
+                  </span>
+                </Button>
+                <br />
+                <Button htmlType="button" onClick={handleOnRestet}>
+                  <span className="action-buttons-text">Limpar</span>
+                </Button>
+              </div>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
     </>
   )
 }

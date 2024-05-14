@@ -1,11 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
-.login-card {
-  top: 50%;
-  margin: 0;
-  position: relative;
-  -ms-transform: translateX(170%);
-  transform: translateX(170%);
+.naasp-logo {
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -40,4 +37,9 @@
   font-size: 16px;
   font-weight: bold;
   font-family: "DM Sans", sans-serif;
+}
+
+.ant-row-middle {
+  display: flex;
+  justify-content: center;
 }
