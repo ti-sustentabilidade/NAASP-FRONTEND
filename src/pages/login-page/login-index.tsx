@@ -1,14 +1,16 @@
 import { Button, Card, Col, Form, Row } from "antd"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import InputText from "../../components/form/input-text"
-import { openNotification } from "../../components/notification/notification"
-import "./index.css"
-import ForgotPasswordIndex from "./forgot-password"
+import openNotification from "../../components/notification/notification"
+import { login } from "../../services/requests/users-api"
+import "./style.css"
 
 function LoginIndex() {
   const [form] = Form.useForm()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isPasswordRequired, setIsPasswordRequired] = useState<boolean>(true)
 
   const handleLogin = async () => {
     setIsLoading(true)
@@ -17,11 +19,7 @@ function LoginIndex() {
     const emailField = form.getFieldValue("email")
 
     const passwordRegex = new RegExp(
-      // /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
-      // 8 letter password, with at least a symbol, upper and lower case letters and a number
-
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,6}$/
-      // Minimum six characters, at least one letter, one number and one special character:
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
     )
     const isPasswordValid = passwordRegex.test(passwordField)
 
@@ -35,45 +33,15 @@ function LoginIndex() {
       setIsLoading(false)
       return
     }
-    try {
-      // Substitua a URL abaixo pelo endpoint de login do seu backend
-      const response = await fetch("http://seu-backend.com/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ emailField, passwordField }),
-      })
-      const data = await response.json()
-
-      if (data.success) {
-        // Redireciona o usuário para a tela correspondente ao seu papel
-        switch (data.userRole) {
-          case "administrador":
-            window.location.href = "/tela-administrador"
-            break
-          case "assistente":
-            window.location.href = "/tela-assistente"
-            break
-          default:
-            // Tratar outros casos ou erro
-            break
-        }
-      } else {
-        // Tratar falha no login
-        openNotification("error", "Falha no login", "topRight", data.message)
-      }
-    } catch (error: any) {
-      // Tratar erro de rede ou desconhecido
-      openNotification(
-        "error",
-        "Erro ao realizar o Login",
-        "topRight",
-        error.message
-      )
-      console.log(error.message)
+    const data = {
+      email: emailField,
+      // senha: passwordField
+      senha: "",
     }
-    setIsLoading(false)
+    console.log(data)
+    await login(data).finally(() => {
+      setIsLoading(false)
+    })
   }
 
   const handleOnRestet = () => {
@@ -103,23 +71,21 @@ function LoginIndex() {
               <InputText
                 placeholder="Senha"
                 name="password"
-                maxLength={6}
                 password
-                required
+                required={isPasswordRequired}
               />
 
               <hr className="separator" />
 
-              <button
+              <Link
                 style={{
-                  backgroundColor: "white",
                   color: "black",
-                  marginBottom: "20px",
+                  fontFamily: "DM Sans",
                 }}
-                onClick={() => <ForgotPasswordIndex />}
+                to="/forgot-password"
               >
-                Esqueceu sua senha?
-              </button>
+                Esqueceu sua Senha?
+              </Link>
 
               <div className="action-buttons">
                 <Button

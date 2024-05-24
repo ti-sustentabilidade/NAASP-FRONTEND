@@ -1,0 +1,14 @@
+.app-page-loader {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.app-page-loader .ant-spin-nested-loading > div > .ant-spin {
+  position: unset;
+}
+
+.app-page-loader .ant-spin-nested-loading .ant-spin-blur {
+  opacity: 0.3;
+}
