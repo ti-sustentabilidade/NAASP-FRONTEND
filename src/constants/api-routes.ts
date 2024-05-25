@@ -1,7 +1,7 @@
 export const API_Routes = {
   NAASP: {
     users: {
-      login: "/usuario",
+      login: "/login",
       password_reset: "/solicitar-nova-senha",
       getAll: "/",
       getById: "/usuarios/:id",
