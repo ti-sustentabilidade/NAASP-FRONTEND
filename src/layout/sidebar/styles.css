@@ -1,0 +1,18 @@
+.ant-layout .menu-top {
+  background-color: #94d4a8;
+}
+.ant-menu {
+  background-color: #94d4a8;
+}
+
+.ant-menu-item:hover {
+  background-color: #145f2c;
+}
+.ant-menu-item-selected {
+  background-color: #145f2c;
+}
+
+.ant-menu-inline li svg,
+.ant-menu-inline li a {
+  color: black !important;
+}

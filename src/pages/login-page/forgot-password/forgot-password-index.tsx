@@ -1,20 +1,24 @@
 import { Button, Card, Col, Form, Row } from "antd"
-import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import InputText from "../../../components/form/input-text"
 import { resetPassword } from "../../../store/app/users/users"
+import { AppDispatch } from "../../../store/store"
 import "../style.css"
 
 function ForgotPasswordIndex() {
   const [form] = Form.useForm()
+  const dispatch = useDispatch<AppDispatch>()
 
-  const handleResetPassword = async () => {
+  const handleResetPassword = () => {
     const emailField = form.getFieldValue("email")
 
     const data = {
       email: emailField,
     }
 
-    await resetPassword(data)
+    console.log(data)
+
+    dispatch(resetPassword(data))
   }
 
   const handleOnRestet = () => {
