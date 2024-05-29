@@ -1,13 +1,20 @@
 import { Button, Card, Col, Form, Row } from "antd"
-import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import InputText from "../../../components/form/input-text"
 import { resetPassword } from "../../../store/app/users/users"
+import { selectResetPasswordStatus } from "../../../store/app/users/users-selector"
+import { StatusEnum } from "../../../store/enums/StatusEnum"
 import { AppDispatch } from "../../../store/store"
 import "../style.css"
 
 function ForgotPasswordIndex() {
   const [form] = Form.useForm()
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
+
+  const resetPasswordStatus = useSelector(selectResetPasswordStatus)
 
   const handleResetPassword = () => {
     const emailField = form.getFieldValue("email")
@@ -16,14 +23,18 @@ function ForgotPasswordIndex() {
       email: emailField,
     }
 
-    console.log(data)
-
     dispatch(resetPassword(data))
   }
 
   const handleOnRestet = () => {
     form.resetFields()
   }
+
+  useEffect(() => {
+    if (resetPasswordStatus == StatusEnum.FULFILLED) {
+      navigate("/")
+    }
+  }, [resetPasswordStatus])
 
   return (
     <>

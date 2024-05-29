@@ -1,19 +1,22 @@
 import { Button, Card, Col, Form, Row } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import InputText from "../../components/form/input-text"
 import openNotification from "../../components/notification/notification"
 import { login } from "../../store/app/users/users"
+import { selectLoginStatus } from "../../store/app/users/users-selector"
+import { StatusEnum } from "../../store/enums/StatusEnum"
 import { AppDispatch } from "../../store/store"
 import "./style.css"
 
 function LoginIndex() {
   const [form] = Form.useForm()
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const user = useSelector((state: any) => state.user)
+  const loginStatus = useSelector(selectLoginStatus)
 
   const handleLogin = async () => {
     setIsLoading(true)
@@ -21,7 +24,7 @@ function LoginIndex() {
     const passwordField = form.getFieldValue("password")
     const emailField = form.getFieldValue("email")
 
-    const passwordRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)
+    const passwordRegex = new RegExp(/^(?=.*)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/)
     const isPasswordValid = passwordRegex.test(passwordField)
 
     if (!isPasswordValid) {
@@ -33,21 +36,27 @@ function LoginIndex() {
       )
 
       setIsLoading(false)
+      return
     }
     const data = {
       email: emailField,
-      // senha: passwordField
-      senha: "",
+      senha: passwordField,
     }
-    console.log(data)
-    dispatch(login(form.getFieldsValue()))
+    dispatch(login(data))
   }
 
   const handleOnRestet = () => {
     form.resetFields()
   }
 
-  console.log(user)
+  useEffect(() => {
+    if (loginStatus == StatusEnum.FULFILLED) {
+      navigate("/home")
+    }
+    if (loginStatus == StatusEnum.REJECTED) {
+      setIsLoading(false)
+    }
+  }, [loginStatus])
 
   return (
     <>

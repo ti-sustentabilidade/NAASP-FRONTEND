@@ -4,7 +4,6 @@ import axios from "axios"
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
 import { TDocumentDefinitions } from "pdfmake/interfaces"
-import { useState } from "react"
 import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
 import { PiPrinter } from "react-icons/pi"
@@ -30,11 +29,11 @@ export const Home = () => {
         },
         layout: "headerLineOnly",
       },
-      { text: "Endereço:" },
-      { text: "CEP:" },
-      { text: "NAASP Responsável" },
-      { text: "Última Assistência Recebida" },
-      { text: "Renda Total da Família" },
+      { text: `Endereço: ` },
+      { text: `CEP: ` },
+      { text: "NAASP Responsável:" },
+      { text: "Última Assistência Recebida:" },
+      { text: "Renda Total da Família:" },
       { text: "BENEFÍCIOS RECEBIDOS PELA FAMÍLIA", style: "subheader" },
       {
         table: {
@@ -77,10 +76,6 @@ export const Home = () => {
 
   const handleGeneratePdf = () => {
     const pdfGenerator = pdfMake.createPdf(pdfmakeContent)
-    pdfGenerator.getBlob((blob: any) => {
-      const url = URL.createObjectURL(blob)
-      console.log(url)
-    })
     pdfGenerator.open()
   }
 

@@ -6,6 +6,8 @@ export type initalStateType = {
   list: {
     state: StateEnum
     status: StatusEnum
+    loginStatus: StatusEnum
+    resetPasswordStatus: StatusEnum
     data: any
   }
 }
@@ -14,6 +16,8 @@ export const initalState: initalStateType = {
   list: {
     state: StateEnum.IDLE,
     status: StatusEnum.IDLE,
+    loginStatus: StatusEnum.IDLE,
+    resetPasswordStatus: StatusEnum.IDLE,
     data: [],
   },
 }
@@ -23,14 +27,19 @@ export const userSlice = createSlice({
   initialState: initalState,
   reducers: {
     setUser: (state: initalStateType, { payload }) => {
-      // console.log(action.payload)
       state.list.data = payload
     },
-    setLoginStatus: (state: initalStateType, { payload }: { payload: StatusEnum }) => {
+    setStatus: (state: initalStateType, { payload }: { payload: StatusEnum }) => {
       state.list.status = payload
+    },
+    setLoginStatus: (state: initalStateType, { payload }: { payload: StatusEnum }) => {
+      state.list.loginStatus = payload
+    },
+    setResetPasswordStatus: (state: initalStateType, { payload }: { payload: StatusEnum }) => {
+      state.list.resetPasswordStatus = payload
     },
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, setStatus, setLoginStatus, setResetPasswordStatus } = userSlice.actions
 export default userSlice.reducer
