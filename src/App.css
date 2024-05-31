@@ -1,42 +1,52 @@
+/* Define as propriedades do elemento com id 'root' */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 1280px; /* A largura máxima é 1280px */
+  margin: 0 auto; /* A margem superior e inferior é 0 e a margem esquerda e direita é automática, centralizando o elemento */
+  padding: 2rem; /* O preenchimento ao redor do elemento é 2rem */
+  text-align: center; /* O texto dentro do elemento é centralizado */
 }
 
+/* Define as propriedades do elemento com a classe 'logo' */
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  height: 6em; /* A altura do logo é 6em */
+  padding: 1.5em; /* O preenchimento ao redor do logo é 1.5em */
+  will-change: filter; /* Indica que a propriedade 'filter' do logo vai mudar, otimizando a animação */
+  transition: filter 300ms; /* A transição da propriedade 'filter' ocorre ao longo de 300ms */
 }
 
+/* Define as propriedades do elemento com a classe 'logo' quando o mouse passa sobre ele */
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa); /* Aplica uma sombra azul ao logo */
+}
+
+/* Define as propriedades do elemento com a classe 'logo' e a classe 'react' quando o mouse passa sobre ele */
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa); /* Aplica uma sombra verde ao logo */
+}
+
+/* Define a animação 'logo-spin' */
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* A animação começa com o logo não rotacionado */
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* A animação termina com o logo rotacionado 360 graus */
   }
 }
 
+/* Define as propriedades do segundo link que contém o elemento com a classe 'logo' para usuários que não preferem movimento reduzido */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 20s linear; /* Aplica a animação 'logo-spin' ao logo, fazendo-o girar infinitamente a cada 20s de maneira linear */
   }
 }
 
+/* Define as propriedades do elemento com a classe 'card' */
 .card {
-  padding: 2em;
+  padding: 2em; /* O preenchimento ao redor do cartão é 2em */
 }
 
+/* Define as propriedades do elemento com a classe 'read-the-docs' */
 .read-the-docs {
-  color: #888;
+  color: #888; /* A cor do texto é um cinza claro */
 }

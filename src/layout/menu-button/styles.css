@@ -1,14 +1,17 @@
+/* Define as propriedades do botão de menu */
 .ant-btn.app-menu-button {
-  border: none;
-  box-shadow: none;
-  background-color: #94d4a8;
-  display: flex;
+  border: none; /* O botão de menu não tem borda */
+  box-shadow: none; /* O botão de menu não tem sombra */
+  background-color: #94d4a8; /* A cor de fundo do botão de menu é um tom de verde */
+  display: flex; /* O botão de menu é exibido como um contêiner flexível */
 }
 
+/* Define as propriedades do botão de menu quando o mouse passa sobre ele */
 .app-menu-button:hover {
-  background-color: #94d4a8 !important;
+  background-color: #94d4a8 !important; /* A cor de fundo do botão de menu permanece a mesma quando o mouse passa sobre ele */
 }
 
+/* Define as propriedades do ícone dentro do botão de menu */
 .app-menu-button-icon {
-  color: black;
+  color: black; /* A cor do ícone dentro do botão de menu é preta */
 }
