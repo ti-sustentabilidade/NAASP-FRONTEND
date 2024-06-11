@@ -34,7 +34,7 @@ const MenuButton = () => {
 
   // Retorna o componente Button com um ícone que muda dependendo do estado de sidebarMenuOpened
   return (
-    <Button onClick={toogleMenu} className={`app-menu-button ${!sidebarMenuOpened ?? "is-active"}`}>
+    <Button onClick={toogleMenu} className={`app-menu-button ${!sidebarMenuOpened ? "is-active" : ""}`}>
       {sidebarMenuOpened ? (
         <LuMenu className='app-menu-button-icon' size={28} />
       ) : (
