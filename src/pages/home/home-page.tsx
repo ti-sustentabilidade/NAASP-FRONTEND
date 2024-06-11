@@ -7,15 +7,15 @@ import { TDocumentDefinitions } from "pdfmake/interfaces"
 import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
 import { PiPrinter } from "react-icons/pi"
-import { useDispatch } from "react-redux"
+//import { useDispatch } from "react-redux"
 import InputText from "../../components/form/input-text"
-import { AppDispatch } from "../../store/store"
+//import { AppDispatch } from "../../store/store"
 import "./styles.css"
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 export const Home = () => {
   const [form] = Form.useForm()
-  const dispatch = useDispatch<AppDispatch>()
+  //const dispatch = useDispatch<AppDispatch>()
 
   const pdfmakeContent: TDocumentDefinitions = {
     content: [

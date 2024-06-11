@@ -1,5 +1,5 @@
 // Importa os componentes Divider, Flex e Layout do pacote antd
-import { Divider, Flex, Layout } from "antd"
+import { Flex, Layout } from "antd"
 
 // Importa o componente Fragment do pacote react
 import { Fragment } from "react"
