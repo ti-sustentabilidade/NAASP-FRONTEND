@@ -1,42 +1,55 @@
+/* Define as propriedades do cabeçalho do layout */
 .ant-layout-header {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background-color: #94d4a8;
-  height: auto;
-  padding: 0;
-  transition: all 0.5s;
-  box-shadow: 1px 1px 1px 1px #145f2c;
+  position: sticky; /* A posição é fixa, mas relativa ao fluxo de rolagem */
+  top: 0; /* O cabeçalho fica no topo da página */
+  z-index: 2; /* O cabeçalho fica acima de outros elementos que têm z-index menor */
+  background-color: #94d4a8; /* A cor de fundo do cabeçalho é um tom de verde */
+  height: auto; /* A altura do cabeçalho é ajustada automaticamente */
+  padding: 0; /* Não há preenchimento ao redor do cabeçalho */
+  transition: all 0.5s; /* Todas as mudanças no cabeçalho ocorrem ao longo de 0.5 segundos */
+  box-shadow: 1px 1px 1px 1px #145f2c; /* O cabeçalho tem uma sombra verde escura */
 }
 
+/* Define as propriedades do logo */
 .logo {
-  height: 40px;
-  margin: 0 20px 0 25px;
-  display: block;
+  height: 40px; /* A altura do logo é 40px */
+  margin: 0 20px 0 25px; /* O logo tem uma margem de 20px à direita e 25px à esquerda */
+  display: block; /* O logo é exibido como um bloco */
 }
+
+/* Define as propriedades da imagem dentro do logo */
 .logo img {
-  height: 100%;
+  height: 100%; /* A imagem ocupa 100% da altura do logo */
 }
+
+/* Define as propriedades da marca dentro do logo */
 .logo .brand {
-  display: block;
+  display: block; /* A marca é exibida como um bloco */
 }
+
+/* Define as propriedades da marca móvel dentro do logo */
 .logo .brand-mobile {
-  display: none;
+  display: none; /* A marca móvel não é exibida por padrão */
 }
 
+/* Define as propriedades do cabeçalho e do logo para telas com largura máxima de 768px */
 @media (max-width: 768px) {
+  /* Define as propriedades do cabeçalho do layout */
   .ant-layout-header {
-    position: sticky;
-    top: 0;
-    padding: 0;
-    z-index: 999;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    position: sticky; /* A posição é fixa, mas relativa ao fluxo de rolagem */
+    top: 0; /* O cabeçalho fica no topo da página */
+    padding: 0; /* Não há preenchimento ao redor do cabeçalho */
+    z-index: 999; /* O cabeçalho fica acima de outros elementos que têm z-index menor */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); /* O cabeçalho tem uma sombra preta com 30% de opacidade */
   }
 
+  /* Define as propriedades da marca dentro do logo */
   .logo .brand {
-    display: none;
+    display: none; /* A marca não é exibida */
   }
+
+  /* Define as propriedades da marca móvel dentro do logo */
   .logo .brand-mobile {
-    display: block;
+    display: block; /* A marca móvel é exibida como um bloco */
   }
 }

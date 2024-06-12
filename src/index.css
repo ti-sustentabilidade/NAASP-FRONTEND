@@ -1,67 +1,84 @@
+/* Importa a fonte DM Sans do Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
+/* Define as propriedades globais para o documento */
 :root {
-  font-family: "DM Sans", sans-serif, Inter, system-ui, Avenir, Helvetica, Arial;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: "DM Sans", sans-serif, Inter, system-ui, Avenir, Helvetica, Arial; /* Define a fonte padrão para o documento */
+  line-height: 1.5; /* Define a altura da linha para o documento */
+  font-weight: 400; /* Define a espessura da fonte para o documento */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #ffffff;
+  color-scheme: light dark; /* Define o esquema de cores para o documento */
+  color: rgba(255, 255, 255, 0.87); /* Define a cor do texto para o documento */
+  background-color: #ffffff; /* Define a cor de fundo para o documento */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none; /* Desativa a síntese de fontes para o documento */
+  text-rendering: optimizeLegibility; /* Otimiza a renderização do texto para legibilidade */
+  -webkit-font-smoothing: antialiased; /* Suaviza as fontes no WebKit */
+  -moz-osx-font-smoothing: grayscale; /* Suaviza as fontes no Firefox */
 }
 
+/* Define as propriedades para todos os links no documento */
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  font-weight: 500; /* Define a espessura da fonte para os links */
+  color: #646cff; /* Define a cor do texto para os links */
+  text-decoration: inherit; /* Herda a decoração do texto dos links */
 }
+
+/* Define as propriedades para todos os links no documento quando o mouse passa sobre eles */
 a:hover {
-  color: #535bf2;
+  color: #535bf2; /* Define a cor do texto para os links quando o mouse passa sobre eles */
 }
 
+/* Define as propriedades para o corpo do documento */
 body {
-  padding: 0;
-  margin: 0;
+  padding: 0; /* Define o preenchimento para o corpo do documento */
+  margin: 0; /* Define a margem para o corpo do documento */
 }
 
+/* Define as propriedades para todos os cabeçalhos h1 no documento */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.2em; /* Define o tamanho da fonte para os cabeçalhos h1 */
+  line-height: 1.1; /* Define a altura da linha para os cabeçalhos h1 */
 }
 
+/* Define as propriedades para todos os botões no documento */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  border-radius: 8px; /* Define o raio da borda para os botões */
+  border: 1px solid transparent; /* Define a borda para os botões */
+  padding: 0.6em 1.2em; /* Define o preenchimento para os botões */
+  font-size: 1em; /* Define o tamanho da fonte para os botões */
+  font-weight: 500; /* Define a espessura da fonte para os botões */
+  font-family: inherit; /* Herda a família de fontes dos botões */
+  background-color: #1a1a1a; /* Define a cor de fundo para os botões */
+  cursor: pointer; /* Define o cursor para os botões */
+  transition: border-color 0.25s; /* Define a transição para a cor da borda dos botões */
 }
+
+/* Define as propriedades para todos os botões no documento quando o mouse passa sobre eles */
 button:hover {
-  border-color: #646cff;
+  border-color: #646cff; /* Define a cor da borda para os botões quando o mouse passa sobre eles */
 }
+
+/* Define as propriedades para todos os botões no documento quando eles estão focados */
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto -webkit-focus-ring-color; /* Define o contorno para os botões quando eles estão focados */
 }
 
+/* Define as propriedades para o documento quando o esquema de cores preferido é claro */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #213547; /* Define a cor do texto para o documento */
+    background-color: #ffffff; /* Define a cor de fundo para o documento */
   }
+
+  /* Define as propriedades para todos os links no documento quando o mouse passa sobre eles */
   a:hover {
-    color: #747bff;
+    color: #747bff; /* Define a cor do texto para os links quando o mouse passa sobre eles */
   }
+
+  /* Define as propriedades para todos os botões no documento */
   button {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Define a cor de fundo para os botões */
   }
 }
