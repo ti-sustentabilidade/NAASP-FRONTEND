@@ -4,7 +4,8 @@ import { PageLoader } from "./components/page-loader"
 
 const LoginPage = lazy(() => import("./pages/login-page/login-index"))
 const ForgotPasswordPage = lazy(() => import("./pages/login-page/forgot-password/forgot-password-index"))
-const HomePage = lazy(() => import("./pages/home/home-page"))
+const HomePage = lazy(() => import("./pages/family/family-register-index"))
+const ViewFamiliesPage = lazy(() => import("./pages/family/view"))
 
 function AppRoutes() {
   return (
@@ -33,6 +34,15 @@ function AppRoutes() {
         element={
           <Suspense fallback={<PageLoader />}>
             <HomePage />
+          </Suspense>
+        }
+      />
+      <Route
+        key={"view-families"}
+        path='/view-families'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <ViewFamiliesPage />
           </Suspense>
         }
       />

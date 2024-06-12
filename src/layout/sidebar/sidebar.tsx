@@ -1,11 +1,16 @@
 import { Divider, Flex, Layout } from "antd"
 import { Fragment } from "react"
 
-import FamilyRegisterMenu from "../../components/menu/family-register"
-import { useBreakPoints } from "../../hooks/use-breakpoints"
-import "./styles.css"
-import { selectSidebarOpened } from "../../store/menu/menu.selector"
 import { useSelector } from "react-redux"
+import AddNaaspMenu from "../../components/menu/add-naasp"
+import AddNewUserMenu from "../../components/menu/add-user"
+import FamilyRegisterMenu from "../../components/menu/family-register"
+import InfoNaaspMenu from "../../components/menu/info-naasp"
+import ViewFamiliesMenu from "../../components/menu/view-families"
+import { useBreakPoints } from "../../hooks/use-breakpoints"
+import { selectSidebarOpened } from "../../store/menu/menu.selector"
+import "./styles.css"
+import LogoutMenu from "../../components/menu/logout"
 
 const Sidebar = () => {
   const sidebarMenuOpened = useSelector(selectSidebarOpened)
@@ -23,19 +28,17 @@ const Sidebar = () => {
       >
         <Flex vertical={true} style={{ height: "100%" }}>
           <Layout className='menu-top'>
-            {/* <Divider />
-            <InfoMenu /> */}
+            <InfoNaaspMenu />
 
             <FamilyRegisterMenu />
 
-            {/* <Divider />
             <ViewFamiliesMenu />
 
-            <Divider />
             <AddNaaspMenu />
 
+            <AddNewUserMenu />
             <Divider />
-            <AddNewUserMenu /> */}
+            <LogoutMenu />
           </Layout>
         </Flex>
       </Layout.Sider>

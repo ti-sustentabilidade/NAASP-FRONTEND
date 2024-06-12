@@ -1,30 +1,30 @@
 import { Menu } from "antd"
 import { MenuItemType } from "antd/es/menu/interface"
-import { GrGroup } from "react-icons/gr"
+import { BiUserPlus } from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import menuAction from "../../store/menu/menu.action"
 import { selectSidebarOpened } from "../../store/menu/menu.selector"
 import { AppDispatch } from "../../store/store"
 
-const FamilyRegisterMenu = () => {
+const AddNewUserMenu = () => {
   const dispatch = useDispatch<AppDispatch>()
   const sidebarMenuOpened = useSelector(selectSidebarOpened)
 
-  const familyRegisterMenuItems: MenuItemType[] = [
+  const addNewUserMenuItems: MenuItemType[] = [
     {
-      key: "familyRegister",
+      key: "addNewUser",
       label: (
-        <Link to={"/home"} style={{ fontSize: "16px" }}>
-          Cadastro de Famílias
+        <Link to={"/add-user"} style={{ fontSize: "16px" }}>
+          Cadastrar novo usuário
         </Link>
       ),
-      icon: <GrGroup size={20} />,
+      icon: <BiUserPlus size={20} />,
       onClick: () => (!sidebarMenuOpened ? dispatch(menuAction.toogleSidebar()) : null),
     },
   ]
 
-  return <Menu className='app-menu' items={familyRegisterMenuItems} mode='inline' />
+  return <Menu className='app-menu' items={addNewUserMenuItems} mode='inline' />
 }
 
-export default FamilyRegisterMenu
+export default AddNewUserMenu

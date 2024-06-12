@@ -1,30 +1,30 @@
 import { Menu } from "antd"
 import { MenuItemType } from "antd/es/menu/interface"
-import { GrGroup } from "react-icons/gr"
+import { CgViewList } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import menuAction from "../../store/menu/menu.action"
 import { selectSidebarOpened } from "../../store/menu/menu.selector"
 import { AppDispatch } from "../../store/store"
 
-const FamilyRegisterMenu = () => {
+const ViewFamiliesMenu = () => {
   const dispatch = useDispatch<AppDispatch>()
   const sidebarMenuOpened = useSelector(selectSidebarOpened)
 
-  const familyRegisterMenuItems: MenuItemType[] = [
+  const viewFamiliesMenuItems: MenuItemType[] = [
     {
-      key: "familyRegister",
+      key: "viewFamilies",
       label: (
-        <Link to={"/home"} style={{ fontSize: "16px" }}>
-          Cadastro de Famílias
+        <Link to={"/view-families"} style={{ fontSize: "16px" }}>
+          Visualizar Familias Cadastradas
         </Link>
       ),
-      icon: <GrGroup size={20} />,
+      icon: <CgViewList size={20} />,
       onClick: () => (!sidebarMenuOpened ? dispatch(menuAction.toogleSidebar()) : null),
     },
   ]
 
-  return <Menu className='app-menu' items={familyRegisterMenuItems} mode='inline' />
+  return <Menu className='app-menu' items={viewFamiliesMenuItems} mode='inline' />
 }
 
-export default FamilyRegisterMenu
+export default ViewFamiliesMenu

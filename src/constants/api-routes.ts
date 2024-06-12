@@ -9,5 +9,9 @@ export const API_Routes = {
       edit: "/",
       delete: "/",
     },
+    family: {
+      getAll: "/familias",
+      create: "/novaFamilia",
+    },
   },
 }
