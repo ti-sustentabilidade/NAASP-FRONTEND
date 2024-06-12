@@ -1,0 +1,20 @@
+.action-buttons {
+  display: flex;
+  /* flex-direction: column; */
+  padding-top: 20px;
+}
+.action-buttons > Col > Button {
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+}
+.action-buttons-text {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.icon-button {
+  margin-top: 6px;
+}
