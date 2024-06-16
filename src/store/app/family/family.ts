@@ -28,6 +28,7 @@ export const getAllFamilies = createAsyncThunk("family/getAll", async (_, { disp
 
   await NAASP_API.get(url)
     .then(async (response: any) => {
+      // console.log(response)
       await dispatch(setFamily(response.data))
       dispatch(setStatus(StatusEnum.FULFILLED))
     })

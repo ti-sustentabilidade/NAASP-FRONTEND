@@ -42,13 +42,13 @@ const Default = () => {
       {location == "/" || location == "/forgot-password" ? (
         <AppRoutes /> // Renderiza o componente AppRoutes se o caminho for "/" ou "/forgot-password"
       ) : (
-        <Layout style={{ minHeight: "100vh" }}> // Caso contrário, renderiza um Layout com cabeçalho, barra lateral e conteúdo
+        <Layout style={{ minHeight: "100vh" }}>
           <Layout.Header>
-            <Header /> // Renderiza o componente Header no cabeçalho do Layout
+            <Header />
           </Layout.Header>
           <Layout hasSider>
-            <Sidebar /> // Renderiza o componente Sidebar na barra lateral do Layout
-            <Layout.Content>{!sidebarMenuOpened && breakpoints.isMobile ? null : <AppRoutes />}</Layout.Content> // Renderiza o componente AppRoutes no conteúdo do Layout se o menu da barra lateral não estiver aberto e o dispositivo não for móvel
+            <Sidebar />
+            <Layout.Content>{!sidebarMenuOpened && breakpoints.isMobile ? null : <AppRoutes />}</Layout.Content>
           </Layout>
         </Layout>
       )}

@@ -50,9 +50,7 @@ function AppRoutes() {
         element={
           // O elemento a ser renderizado para a rota
           <Suspense fallback={<PageLoader />}>
-            {" "}
-            // Usa o componente Suspense para esperar até que o componente HomePage seja carregado
-            <HomePage /> // Renderiza o componente HomePage
+            <HomePage />
           </Suspense>
         }
       />

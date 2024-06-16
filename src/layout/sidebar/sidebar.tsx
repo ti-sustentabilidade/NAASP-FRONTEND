@@ -36,7 +36,7 @@ const Sidebar = () => {
         <Flex vertical={true} style={{ height: "100%" }}>
           <Layout className='menu-top'>
             <InfoNaaspMenu />
-            <FamilyRegisterMenu /> // Renderiza o componente FamilyRegisterMenu
+            <FamilyRegisterMenu />
             <ViewFamiliesMenu />
             <AddNaaspMenu />
             <AddNewUserMenu />

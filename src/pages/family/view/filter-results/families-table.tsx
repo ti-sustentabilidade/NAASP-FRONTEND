@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { Space, Table } from "antd"
 import dayjs from "dayjs"
@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { BiDollar, BiEdit } from "react-icons/bi"
 import { BsPeople } from "react-icons/bs"
 import { getAllFamilies } from "../../../../store/app/family/family"
+import { selectFamily } from "../../../../store/app/family/family-selector"
 import { AppDispatch } from "../../../../store/store"
 import FamilyDetailsModal from "../details/details-modal"
 import "./styles.css"
@@ -16,7 +17,7 @@ export const FamilyResults = () => {
   const [openFamilyMembers, setOpenFamilyMembers] = useState<boolean>(false)
   const [openFamilyBenefits, setOpenFamilyBenefits] = useState<boolean>(false)
 
-  // const families = useSelector(selectFamily)
+  const families = useSelector(selectFamily)
 
   const handleOnOk = () => {
     setOpen(false)
@@ -120,7 +121,8 @@ export const FamilyResults = () => {
       dataIndex: "data_ultima_assistencia",
       key: "data_ultima_assistencia",
       render: (value: any) => {
-        return <span>{dayjs(value).format("DD/MM/YYYY")}</span>
+        console.log(value)
+        return <span>{value ? dayjs(value).format("DD/MM/YYYY") : "-"}</span>
       },
     },
     {
@@ -128,24 +130,10 @@ export const FamilyResults = () => {
       dataIndex: "id_naasp",
       key: "id_naasp",
     },
-    // {
-    //   title: "Membros",
-    //   dataIndex: "membros",
-    //   key: "membros",
-    // },
-    // {
-    //   title: "Benefícios",
-    //   dataIndex: "beneficios",
-    //   key: "beneficios",
-    // },
-  ]
-
-  const dataSource = [
     {
-      key: "1",
-      data_ultima_assistencia: "2024-06-11T00:49:26.800Z",
-      renda_percapita: 32,
-      endereco: "10 Downing Street",
+      title: "Observação",
+      dataIndex: "observacao",
+      key: "observacao",
     },
   ]
 
@@ -155,7 +143,7 @@ export const FamilyResults = () => {
 
   return (
     <div style={{ marginLeft: "20px", marginRight: "20px", marginTop: "20px" }}>
-      <Table columns={columns} dataSource={dataSource} pagination={{ pageSize: 10 }} scroll={{ y: 240 }} />
+      <Table columns={columns} dataSource={families} pagination={{ pageSize: 10 }} scroll={{ y: 600 }} />
       <FamilyDetailsModal
         open={open}
         onOk={handleOnOk}

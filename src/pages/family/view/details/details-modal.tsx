@@ -30,30 +30,35 @@ export const FamilyDetailsModal = ({
         </Button>,
       ]}
     >
-      <div hidden={openFamilyMembers}>
-        <h2>Membros da Família</h2>
-        {familyMembers.map((familyMember: any, index: any) => (
-          <Fragment>
-            {index > 0 ? <hr></hr> : <></>}
-            <p>Nome: {familyMember.nome}</p>
-            <p>Nome Mãe: {familyMember.nome_mae}</p>
-            <p>Endereço: {familyMember.endereco_familia}</p>
-            <p>Data Nascimento: {familyMember.data_nascimento}</p>
-          </Fragment>
-        ))}
-      </div>
-      <div hidden={openFamilyBenefits}>
-        <h2>Benefícios da Família</h2>
-        {familyBenefits.map((familyBenefit: any, index: any) => (
-          <Fragment>
-            {index > 0 ? <hr></hr> : <></>}
-            <p hidden>a</p>
-            <p>Data Recebimento: {familyBenefit.data_recebimento}</p>
-            <p>Nome Benefício: {familyBenefit.nome_beneficio}</p>
-            <p>Nome Família: {familyBenefit.endereco_familia}</p>
-          </Fragment>
-        ))}
-      </div>
+      {openFamilyMembers ? (
+        <div>
+          <h2>Membros da Família</h2>
+          {familyMembers.map((familyMember: any, index: any) => (
+            <Fragment>
+              {index > 0 ? <hr></hr> : <></>}
+              <p>Nome: {familyMember.nome}</p>
+              <p>Nome Mãe: {familyMember.nome_mae}</p>
+              <p>Endereço: {familyMember.endereco_familia}</p>
+              <p>Data Nascimento: {familyMember.data_nascimento}</p>
+            </Fragment>
+          ))}
+        </div>
+      ) : null}
+
+      {openFamilyBenefits ? (
+        <div>
+          <h2>Benefícios da Família</h2>
+          {familyBenefits.map((familyBenefit: any, index: any) => (
+            <Fragment>
+              {index > 0 ? <hr></hr> : <></>}
+              <p hidden>a</p>
+              <p>Data Recebimento: {familyBenefit.data_recebimento}</p>
+              <p>Nome Benefício: {familyBenefit.nome_beneficio}</p>
+              <p>Nome Família: {familyBenefit.endereco_familia}</p>
+            </Fragment>
+          ))}
+        </div>
+      ) : null}
     </Modal>
   )
 }

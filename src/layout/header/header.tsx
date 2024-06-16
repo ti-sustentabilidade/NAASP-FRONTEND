@@ -14,15 +14,15 @@ import MenuButton from "../menu-button/menu-button"
 const Header = () => {
   return (
     <Fragment>
-      <Row wrap={false} align={"middle"}> // Cria uma linha que não quebra e alinha seus itens verticalmente no meio
-        <Col flex={"50px"}> // Cria uma coluna com largura fixa de 50px
-          <MenuButton /> // Renderiza o componente MenuButton
+      <Row wrap={false} align={"middle"}>
+        <Col flex={"50px"}>
+          <MenuButton />
         </Col>
-        <Col flex={"auto"}> // Cria uma coluna com largura automática
-          <Row wrap={false} align={"middle"}> // Cria uma linha que não quebra e alinha seus itens verticalmente no meio
-            <Col flex={"none"}> // Cria uma coluna sem flexibilidade
-              <a className='logo' href=''> // Cria um link com a classe CSS 'logo'
-                <img src='src/assets/logo-naasp.png' alt='NAASP' className='brand' /> // Renderiza uma imagem com a classe CSS 'brand'
+        <Col flex={"auto"}>
+          <Row wrap={false} align={"middle"}>
+            <Col flex={"none"}>
+              <a className='logo' href=''>
+                <img src='src/assets/logo-naasp.png' alt='NAASP' className='brand' />
               </a>
             </Col>
           </Row>
