@@ -28,7 +28,7 @@ export const FamilyFilter = () => {
     form.resetFields()
   }
 
-  const handleDateOnChange = (date: any, dateString: any) => {
+  const handleDateOnChange = (date: any) => {
     form.setFieldValue("data_nascimento", date.toISOString())
   }
 
