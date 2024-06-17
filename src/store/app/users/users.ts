@@ -58,9 +58,9 @@ export const resetPassword = createAsyncThunk("users/reset-password", async (dat
 
   // Faz uma solicitação POST para a URL com os dados fornecidos
   await NAASP_API.post(url, data)
-    .then(async (response: any) => {
+    .then((response: any) => {
       // Se a solicitação for bem-sucedida, dispara a ação setResetPasswordStatus com o status FULFILLED
-      await dispatch(setResetPasswordStatus(StatusEnum.FULFILLED))
+      dispatch(setResetPasswordStatus(StatusEnum.FULFILLED))
 
       // Abre uma notificação de sucesso
       openNotification("success", "Reset de Senha", "topRight", "E-mail de redefinição de senha enviado com sucesso!")

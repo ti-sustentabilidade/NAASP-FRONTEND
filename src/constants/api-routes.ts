@@ -14,7 +14,12 @@ export const API_Routes = {
     },
     family: {
       getAll: "/buscarTodasFamilias",
+      search: "/buscarFamilia",
       create: "/novaFamilia",
+    },
+    naasp: {
+      getAll: "/buscarNaasps",
+      create: "/novoNaasp",
     },
   },
 }

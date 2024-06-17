@@ -14,6 +14,8 @@ const LoginPage = lazy(() => import("./pages/login-page/login-index"))
 const ForgotPasswordPage = lazy(() => import("./pages/login-page/forgot-password/forgot-password-index"))
 const HomePage = lazy(() => import("./pages/family/family-register-index"))
 const ViewFamiliesPage = lazy(() => import("./pages/family/view"))
+const ViewNaaspsPage = lazy(() => import("./pages/naasp/info/index"))
+const AddNaaspsPage = lazy(() => import("./pages/naasp/naasp-register-index"))
 
 // Define e exporta a função AppRoutes
 function AppRoutes() {
@@ -25,10 +27,10 @@ function AppRoutes() {
         path='/' // O caminho para a rota
         element={
           // O elemento a ser renderizado para a rota
+          // Renderiza o componente LoginPage
+          // Usa o componente Suspense para esperar até que o componente LoginPage seja carregado
           <Suspense fallback={<PageLoader />}>
-            {" "}
-            // Usa o componente Suspense para esperar até que o componente LoginPage seja carregado
-            <LoginPage /> // Renderiza o componente LoginPage
+            <LoginPage />
           </Suspense>
         }
       />
@@ -37,10 +39,10 @@ function AppRoutes() {
         path='/forgot-password' // O caminho para a rota
         element={
           // O elemento a ser renderizado para a rota
+          // Usa o componente Suspense para esperar até que o componente ForgotPasswordPage seja carregado
+          // Renderiza o componente ForgotPasswordPage
           <Suspense fallback={<PageLoader />}>
-            {" "}
-            // Usa o componente Suspense para esperar até que o componente ForgotPasswordPage seja carregado
-            <ForgotPasswordPage /> // Renderiza o componente ForgotPasswordPage
+            <ForgotPasswordPage />
           </Suspense>
         }
       />
@@ -60,6 +62,24 @@ function AppRoutes() {
         element={
           <Suspense fallback={<PageLoader />}>
             <ViewFamiliesPage />
+          </Suspense>
+        }
+      />
+      <Route
+        key={"add-naasp"}
+        path='/add-naasp'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AddNaaspsPage />
+          </Suspense>
+        }
+      />
+      <Route
+        key={"view-naasps"}
+        path='/view-naasps'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <ViewNaaspsPage />
           </Suspense>
         }
       />

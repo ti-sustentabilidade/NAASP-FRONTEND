@@ -4,6 +4,7 @@ import { FamilyFilter } from "./filter-results/families-filter"
 export const ViewFamiliesIndex = () => {
   return (
     <>
+      <title>Visualizar Famílias</title>
       <FamilyFilter />
       <FamilyResults />
     </>

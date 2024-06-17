@@ -15,12 +15,15 @@ const LogoutMenu = () => {
     {
       key: "logout",
       label: (
-        <Link to={"/logout"} style={{ fontSize: "16px" }}>
+        <Link to={"/"} style={{ fontSize: "16px" }}>
           Sair
         </Link>
       ),
       icon: <BiLogOut size={20} color='red' />,
-      onClick: () => (!sidebarMenuOpened ? dispatch(menuAction.toogleSidebar()) : null),
+      onClick: () => {
+        !sidebarMenuOpened ? dispatch(menuAction.toogleSidebar()) : null
+        window.location.reload()
+      },
     },
   ]
 

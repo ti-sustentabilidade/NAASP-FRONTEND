@@ -2,7 +2,7 @@ import { Menu } from "antd"
 import { MenuItemType } from "antd/es/menu/interface"
 import { CgViewList } from "react-icons/cg"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import menuAction from "../../store/menu/menu.action"
 import { selectSidebarOpened } from "../../store/menu/menu.selector"
 import { AppDispatch } from "../../store/store"
@@ -10,6 +10,7 @@ import { AppDispatch } from "../../store/store"
 const ViewFamiliesMenu = () => {
   const dispatch = useDispatch<AppDispatch>()
   const sidebarMenuOpened = useSelector(selectSidebarOpened)
+  const location = useLocation()
 
   const viewFamiliesMenuItems: MenuItemType[] = [
     {
@@ -24,7 +25,7 @@ const ViewFamiliesMenu = () => {
     },
   ]
 
-  return <Menu className='app-menu' items={viewFamiliesMenuItems} mode='inline' />
+  return <Menu className='app-menu' items={viewFamiliesMenuItems} mode='inline' selectedKeys={[location.pathname]} />
 }
 
 export default ViewFamiliesMenu

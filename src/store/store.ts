@@ -5,12 +5,13 @@ import { configureStore } from "@reduxjs/toolkit"
 import { userSlice } from "./app/users/users-reducer"
 
 // Importa a fatia de menu do arquivo local
-import { menuSlice } from "./menu/menu.reducer"
 import { familySlice } from "./app/family/family-reducer"
+import { naaspSlice } from "./app/naasps/naasp-reducer"
+import { menuSlice } from "./menu/menu.reducer"
 
 // Define e exporta a loja Redux
 export const store = configureStore({
-  reducer: { user: userSlice.reducer, menu: menuSlice.reducer, family: familySlice.reducer },
+  reducer: { user: userSlice.reducer, menu: menuSlice.reducer, family: familySlice.reducer, naasp: naaspSlice.reducer },
 })
 
 // Define e exporta o tipo AppDispatch como o tipo da função dispatch da loja

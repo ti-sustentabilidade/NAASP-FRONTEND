@@ -28,7 +28,26 @@ export const getAllFamilies = createAsyncThunk("family/getAll", async (_, { disp
 
   await NAASP_API.get(url)
     .then(async (response: any) => {
-      // console.log(response)
+      await dispatch(setFamily(response.data))
+      dispatch(setStatus(StatusEnum.FULFILLED))
+    })
+    .catch((error: any) => {
+      openNotification("error", "Erro ao realizar a busca", "topRight", error.message)
+      dispatch(setStatus(StatusEnum.REJECTED))
+      console.log(error.message)
+    })
+})
+
+export const searchFamily = createAsyncThunk("family/searchFamily", async (data: any, { dispatch }) => {
+  dispatch(setStatus(StatusEnum.PENDING))
+
+  const url =
+    API_Routes.NAASP.family.search +
+    // `?nome=Membro1 sobrenome&nome_mae=mae&data_nascimento=${data.data_nascimento}`
+    `?nome=${data.nome}&data_nascimento=${data.data_nascimento}${data.nome_mae ? `&nome_mae=${data.nome_mae}` : ""}`
+
+  await NAASP_API.get(url)
+    .then(async (response: any) => {
       await dispatch(setFamily(response.data))
       dispatch(setStatus(StatusEnum.FULFILLED))
     })

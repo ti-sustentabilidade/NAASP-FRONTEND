@@ -1,12 +1,11 @@
-import { Button, Col, Form, Row } from "antd"
+import { Button, Col, DatePicker, Form, Row } from "antd"
 import { BiSearch } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
 
-import axios from "axios"
 import { useDispatch } from "react-redux"
 
 import InputText from "../../../../components/form/input-text"
-import { getAllFamilies } from "../../../../store/app/family/family"
+import { searchFamily } from "../../../../store/app/family/family"
 import { AppDispatch } from "../../../../store/store"
 import "./styles.css"
 
@@ -17,21 +16,20 @@ export const FamilyFilter = () => {
   // const families = useSelector(selectFamily)
 
   const handleSearchFamily = () => {
-    dispatch(getAllFamilies())
-  }
+    const data = form.getFieldsValue()
+    const data_nascimento = form.getFieldValue("data_nascimento")
+    console.log(data)
 
-  const handleOnChangeCep = async () => {
-    const cep = form.getFieldValue("cep")
-
-    if (cep.length == 8) {
-      await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((response: any) => {
-        form.setFieldValue("endereco", `${response.data.logradouro} - ${response.data.bairro}`)
-      })
-    }
+    dispatch(searchFamily({ ...data, data_nascimento }))
+    // dispatch(getAllFamilies())
   }
 
   const handleOnRestet = () => {
     form.resetFields()
+  }
+
+  const handleDateOnChange = (date: any, dateString: any) => {
+    form.setFieldValue("data_nascimento", date.toISOString())
   }
 
   return (
@@ -39,26 +37,21 @@ export const FamilyFilter = () => {
       <h1 className='title'>Buscar Familia</h1>
       <Form form={form} onFinish={handleSearchFamily}>
         <Row gutter={[20, 20]} align={"middle"}>
-          {/* <Col xs={24} sm={14} md={5}>
+          <Col xs={24} sm={3} md={3}>
             <DatePicker
               placeholder='Data de nascimento'
-              name='brith_date'
+              name='data_nascimento'
               format={"DD/MM/YYYY"}
-              style={{ width: "210px", marginBottom: "25px" }}
+              onChange={handleDateOnChange}
+              style={{ marginBottom: "25px" }}
               required
             />
           </Col>
-          <Col xs={24} sm={7} md={4}>
-            <InputText placeholder='Nome do Morador' name='morador' required />
+          <Col xs={24} sm={6} md={6}>
+            <InputText placeholder='Nome do Morador' name='nome' required />
           </Col>
-          <Col xs={24} sm={10} md={4}>
-            <InputText placeholder='Nome da mãe' name='mae' required />
-          </Col> */}
-          <Col xs={24} sm={7} md={11}>
-            <InputText placeholder='CEP' name='cep' type='number' onChange={handleOnChangeCep} maxLength={8} required />
-          </Col>
-          <Col xs={24} sm={10} md={11}>
-            <InputText placeholder='Endereço' name='endereco' required disabled />
+          <Col xs={24} sm={6} md={6}>
+            <InputText placeholder='Nome da mãe' name='nome_mae' />
           </Col>
 
           <div className='action-buttons'>

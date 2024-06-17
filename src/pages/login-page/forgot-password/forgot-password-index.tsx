@@ -38,6 +38,7 @@ function ForgotPasswordIndex() {
 
   return (
     <>
+      <title>Esqueci Senha</title>
       <div className='naasp-logo'>
         <img src='src/assets/naasp.png' alt='naasp-logo' style={{ width: "300px", height: "150px" }} />
       </div>
@@ -51,7 +52,11 @@ function ForgotPasswordIndex() {
               <InputText placeholder='E-mail' name='email' type='email' required />
 
               <div className='action-buttons' style={{ marginLeft: "40px" }}>
-                <Button type='primary' htmlType='submit'>
+                <Button
+                  type='primary'
+                  htmlType='submit'
+                  loading={resetPasswordStatus == StatusEnum.PENDING ? true : false}
+                >
                   <span className='action-buttons-text'> Resetar Senha</span>
                 </Button>
                 <br />

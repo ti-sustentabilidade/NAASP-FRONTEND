@@ -7,7 +7,7 @@ import { GrGroup } from "react-icons/gr"
 import { useDispatch, useSelector } from "react-redux"
 
 // Importa o componente Link do pacote react-router-dom
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 // Importa a ação menuAction do arquivo local
 import menuAction from "../../store/menu/menu.action"
@@ -22,6 +22,7 @@ import { AppDispatch } from "../../store/store"
 const FamilyRegisterMenu = () => {
   // Usa o hook useDispatch para obter a função dispatch
   const dispatch = useDispatch<AppDispatch>()
+  const location = useLocation()
 
   // Usa o hook useSelector para obter o valor de sidebarMenuOpened do estado
   const sidebarMenuOpened = useSelector(selectSidebarOpened)
@@ -42,7 +43,7 @@ const FamilyRegisterMenu = () => {
   ]
 
   // Retorna o componente Menu com os itens do menu de registro de família
-  return <Menu className='app-menu' items={familyRegisterMenuItems} mode='inline' />
+  return <Menu className='app-menu' items={familyRegisterMenuItems} mode='inline' selectedKeys={[location.pathname]} />
 }
 
 // Exporta o componente FamilyRegisterMenu como padrão

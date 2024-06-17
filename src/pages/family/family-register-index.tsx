@@ -90,12 +90,13 @@ export const FamilyRegisterIndex = () => {
       observacao: form.getFieldValue("observacao"),
       renda_percapita: Number(form.getFieldValue("renda_percapita")),
       data_ultima_assistencia: form.getFieldValue("data_ultima_assistencia"),
-      id_naasp: 1,
+      id_naasp: 7,
       beneficios: [],
       membros_familia: [],
     }
 
     dispatch(createFamily(data))
+    handleOnRestet()
   }
 
   const handleGeneratePdf = () => {
@@ -128,6 +129,7 @@ export const FamilyRegisterIndex = () => {
 
   return (
     <div style={{ marginLeft: "30px" }}>
+      <title>Cadastro de Família</title>
       <h1 className='title'>Cadastramento de Famílias</h1>
       <Form form={form} onFinish={handleCreateFamily}>
         <Row gutter={[20, 20]} align={"middle"}>
@@ -135,10 +137,10 @@ export const FamilyRegisterIndex = () => {
             <InputText placeholder='CEP' name='cep' type='number' onChange={handleOnChangeCep} maxLength={8} required />
           </Col>
           <Col xs={24} sm={10} md={10}>
-            <InputText placeholder='Endereço' name='endereco' required disabled />
+            <InputText placeholder='Endereço' name='endereco' required />
           </Col>
           <Col xs={24} sm={5} md={3}>
-            <InputText placeholder='Número' name='number' required />
+            <InputText placeholder='Número' name='number' />
           </Col>
           <Col xs={24} sm={14} md={10}>
             <InputText placeholder='NAASP Responsável' name='responsible_naasp' required />
@@ -179,6 +181,7 @@ export const FamilyRegisterIndex = () => {
                 <span className='action-buttons-text'>Imprimir Formulário</span>
               </Button>
             </Col>
+            <br />
             <Col xs={24} sm={24} md={7}>
               <Button
                 type='primary'
@@ -189,6 +192,7 @@ export const FamilyRegisterIndex = () => {
                 <span className='action-buttons-text'>Salvar</span>
               </Button>
             </Col>
+            <br />
             <Col xs={24} sm={24} md={3}>
               <Button
                 htmlType='button'

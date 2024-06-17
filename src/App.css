@@ -4,6 +4,12 @@
   margin: 0 auto; /* A margem superior e inferior é 0 e a margem esquerda e direita é automática, centralizando o elemento */
   padding: 2rem; /* O preenchimento ao redor do elemento é 2rem */
   text-align: center; /* O texto dentro do elemento é centralizado */
+
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 /* Define as propriedades do elemento com a classe 'logo' */
