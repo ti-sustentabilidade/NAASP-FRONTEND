@@ -22,7 +22,7 @@ const Header = () => {
           <Row wrap={false} align={"middle"}>
             <Col flex={"none"}>
               <a className='logo' href=''>
-                <img src='assets/logo-naasp.png' alt='NAASP' className='brand' />
+                <img src='https://naaspsg.onrender.com/assets/logo-naasp-x5U1yReK.png' alt='NAASP' className='brand' />
               </a>
             </Col>
           </Row>
