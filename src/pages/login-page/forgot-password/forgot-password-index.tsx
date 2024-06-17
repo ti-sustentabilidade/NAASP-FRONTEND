@@ -40,7 +40,11 @@ function ForgotPasswordIndex() {
     <>
       <title>Esqueci Senha</title>
       <div className='naasp-logo'>
-        <img src='assets/naasp.png' alt='naasp-logo' style={{ width: "300px", height: "150px" }} />
+        <img
+          src='https://naaspsg.onrender.com/assets/naasp-DQ1KPi_p.png'
+          alt='naasp-logo'
+          style={{ width: "300px", height: "150px" }}
+        />
       </div>
       <Row align={"middle"}>
         <Col>
