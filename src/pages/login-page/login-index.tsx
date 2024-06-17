@@ -69,7 +69,7 @@ function LoginIndex() {
     <>
       <title>Login</title>
       <div className='naasp-logo'>
-        <img src='src/assets/naasp.png' alt='naasp-logo' style={{ width: "300px", height: "150px" }} />
+        <img src='assets/naasp.png' alt='naasp-logo' style={{ width: "300px", height: "150px" }} />
       </div>
       <Row align={"middle"}>
         <Col>
