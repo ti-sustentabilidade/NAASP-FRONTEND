@@ -1,0 +1,50 @@
+.main-div {
+  margin-left: 30px;
+}
+
+.action-buttons {
+  display: flex;
+}
+.action-buttons > Col > Button {
+  border-radius: 10px;
+  height: 50px;
+  width: 200px;
+}
+.action-buttons-text {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.save-button {
+  width: 100px;
+  height: 35px;
+}
+.clear-button {
+  width: 100px;
+  height: 35px;
+}
+
+@media (max-width: 575px) {
+  .main-div {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    /* margin-right: 100px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .save-button {
+    width: 200px;
+    height: 40px;
+    /* padding-right: 100px; */
+  }
+  .clear-button {
+    width: 200px;
+    height: 40px;
+  }
+}

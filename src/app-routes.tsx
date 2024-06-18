@@ -1,25 +1,15 @@
-// Importa as funções lazy e Suspense do pacote react
 import { lazy, Suspense } from "react"
-
-// Importa os componentes Route e Routes do pacote react-router-dom
 import { Route, Routes } from "react-router-dom"
-
-// Importa o componente PageLoader do arquivo local
 import { PageLoader } from "./components/page-loader"
-
-// Usa a função lazy para carregar o componente LoginPage de forma preguiçosa
 const LoginPage = lazy(() => import("./pages/login-page/login-index"))
-
-// Usa a função lazy para carregar o componente ForgotPasswordPage de forma preguiçosa
 const ForgotPasswordPage = lazy(() => import("./pages/login-page/forgot-password/forgot-password-index"))
-const HomePage = lazy(() => import("./pages/family/family-register-index"))
+const AddFamiliesPage = lazy(() => import("./pages/family/family-register-index"))
 const ViewFamiliesPage = lazy(() => import("./pages/family/view"))
 const ViewNaaspsPage = lazy(() => import("./pages/naasp/info/index"))
 const AddNaaspsPage = lazy(() => import("./pages/naasp/naasp-register-index"))
+const AddUserPage = lazy(() => import("./pages/user/user-register-index"))
 
-// Define e exporta a função AppRoutes
 function AppRoutes() {
-  // Retorna o componente Routes com várias rotas
   return (
     <Routes>
       <Route
@@ -52,7 +42,7 @@ function AppRoutes() {
         element={
           // O elemento a ser renderizado para a rota
           <Suspense fallback={<PageLoader />}>
-            <HomePage />
+            <AddFamiliesPage />
           </Suspense>
         }
       />
@@ -80,6 +70,15 @@ function AppRoutes() {
         element={
           <Suspense fallback={<PageLoader />}>
             <ViewNaaspsPage />
+          </Suspense>
+        }
+      />
+      <Route
+        key={"add-user"}
+        path='/add-user'
+        element={
+          <Suspense fallback={<PageLoader />}>
+            <AddUserPage />
           </Suspense>
         }
       />

@@ -67,7 +67,7 @@ export const FamilyResults = () => {
       dataIndex: "naasps",
       key: "naasps",
       render: (value: any) => {
-        return <span>{value.nome}</span>
+        return <span>{value?.nome}</span>
       },
     },
     {

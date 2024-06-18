@@ -243,7 +243,6 @@ export const FamilyRegisterIndex = () => {
                 getAddresByCep(form)
               }}
               maxLength={8}
-              required
             />
           </Col>
           <Col xs={24} sm={10} md={10}>
