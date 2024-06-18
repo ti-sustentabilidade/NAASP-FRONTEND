@@ -5,7 +5,7 @@ import * as pdfMake from "pdfmake/build/pdfmake"
 import { TDocumentDefinitions } from "pdfmake/interfaces"
 import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
-import { PiPersonArmsSpread, PiPrinter } from "react-icons/pi"
+import { PiMemberOf, PiPersonArmsSpread, PiPrinter } from "react-icons/pi"
 import { DollarCircleOutlined } from "@ant-design/icons"
 import moment from "moment"
 import { ChangeEvent, useEffect, useState } from "react"
@@ -19,6 +19,7 @@ import { selectNaaspOptions } from "../../store/app/naasps/naasp-selector"
 import { AppDispatch } from "../../store/store"
 import getAddresByCep from "../../utils/get-address"
 import "./styles.css"
+import { BsPersonAdd } from "react-icons/bs"
 
 interface BenefitsInputData {
   nome_beneficio: string
@@ -112,6 +113,19 @@ export const FamilyRegisterIndex = () => {
   }
 
   const handleCreateFamily = () => {
+    if (benefitInputs.length) {
+      benefitInputs.map((benefit: any) => {
+        if (benefit.nome_beneficio == "" || undefined || benefit.data_recebimento == "" || undefined) {
+          openNotification(
+            "error",
+            "Erro ao criar a família",
+            "topRight",
+            "Os benefícios da família não foram preenchidos",
+          )
+          return
+        }
+      })
+    }
     if (memberInputs.length) {
       memberInputs.map((member: any) => {
         if (member.nome == "" || undefined || member.data_nascimento == "" || undefined) {
@@ -282,7 +296,7 @@ export const FamilyRegisterIndex = () => {
                 addBenefitInputs()
               }}
             >
-              <DollarCircleOutlined className='icon-button' />
+              <DollarCircleOutlined className='money-icon-button' />
               <span className='benefit-button-text'>Adicionar beneficios</span>
             </Button>
           </Col>
@@ -314,7 +328,7 @@ export const FamilyRegisterIndex = () => {
                   removeBenefitInputs(index)
                 }}
               >
-                <TbTrash className='icon-button' />
+                <TbTrash className='trash-icon-button' />
               </Button>
             </div>
           ))}
@@ -328,7 +342,7 @@ export const FamilyRegisterIndex = () => {
                 addMembersInputs()
               }}
             >
-              <PiPersonArmsSpread className='icon-button' />
+              <BsPersonAdd className='person-icon-button' />
               <span className='member-button-text'>Adicionar membros</span>
             </Button>
           </Col>
@@ -368,7 +382,7 @@ export const FamilyRegisterIndex = () => {
                   removeMemberInputs(index)
                 }}
               >
-                <TbTrash className='icon-button' />
+                <TbTrash className='trash-icon-button' />
               </Button>
             </div>
           ))}
