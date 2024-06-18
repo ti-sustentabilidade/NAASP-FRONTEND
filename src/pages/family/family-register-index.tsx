@@ -113,6 +113,8 @@ export const FamilyRegisterIndex = () => {
   }
 
   const handleCreateFamily = () => {
+    const number = form.getFieldValue("number")
+
     if (benefitInputs.length) {
       benefitInputs.map((benefit: any) => {
         if (benefit.nome_beneficio == "" || undefined || benefit.data_recebimento == "" || undefined) {
@@ -145,7 +147,7 @@ export const FamilyRegisterIndex = () => {
     }
 
     const data = {
-      endereco: form.getFieldValue("endereco"),
+      endereco: `${form.getFieldValue("endereco")}${number ? ", " + number : ""}`,
       observacao: form.getFieldValue("observacao"),
       renda_percapita: Number(form.getFieldValue("renda_percapita")),
       data_ultima_assistencia: form.getFieldValue("data_ultima_assistencia"),
