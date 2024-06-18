@@ -1,22 +1,41 @@
 import { Button, Col, DatePicker, Form, Row, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
-import axios from "axios"
 import * as pdfMake from "pdfmake/build/pdfmake"
 
 import { TDocumentDefinitions } from "pdfmake/interfaces"
 import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
-import { PiPrinter } from "react-icons/pi"
-//import { useDispatch } from "react-redux"
+import { PiPersonArmsSpread, PiPrinter } from "react-icons/pi"
+import { DollarCircleOutlined } from "@ant-design/icons"
+import moment from "moment"
+import { ChangeEvent, useEffect, useState } from "react"
+import { TbTrash } from "react-icons/tb"
 import { useDispatch, useSelector } from "react-redux"
 import InputText from "../../components/form/input-text"
+import openNotification from "../../components/notification/notification"
 import { createFamily } from "../../store/app/family/family"
-import { AppDispatch } from "../../store/store"
-import "./styles.css"
+import { getAllNaasps } from "../../store/app/naasps/naasp"
 import { selectNaaspOptions } from "../../store/app/naasps/naasp-selector"
+import { AppDispatch } from "../../store/store"
+import getAddresByCep from "../../utils/get-address"
+import "./styles.css"
+
+interface BenefitsInputData {
+  nome_beneficio: string
+  data_recebimento: any
+}
+interface MembersInputData {
+  nome_mae: string
+  nome: string
+  data_nascimento: string
+}
 
 export const FamilyRegisterIndex = () => {
   const [form] = Form.useForm()
+  const [benefitInputs, setBenefitInputs] = useState<BenefitsInputData[]>([])
+  const [memberInputs, setMemberInputs] = useState<MembersInputData[]>([])
+  const [naaspId, setNaaspId] = useState<number>()
+
   const dispatch = useDispatch<AppDispatch>()
 
   const options = useSelector(selectNaaspOptions)
@@ -87,39 +106,92 @@ export const FamilyRegisterIndex = () => {
     },
   }
 
-  const handleCreateFamily = () => {
-    const data = {
-      endereco: form.getFieldValue("endereco"),
-      observacao: form.getFieldValue("observacao"),
-      renda_percapita: Number(form.getFieldValue("renda_percapita")),
-      data_ultima_assistencia: form.getFieldValue("data_ultima_assistencia"),
-      id_naasp: 7,
-      beneficios: [],
-      membros_familia: [],
-    }
-
-    dispatch(createFamily(data))
-    handleOnRestet()
-  }
-
   const handleGeneratePdf = () => {
     const pdfGenerator = pdfMake.createPdf(pdfmakeContent, {}, pdfFonts)
     pdfGenerator.open()
   }
 
-  const handleOnChangeCep = async () => {
-    const cep = form.getFieldValue("cep")
-
-    if (cep.length == 8) {
-      await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((response: any) => {
-        console.log(response)
-        form.setFieldValue("endereco", `${response.data.logradouro} - ${response.data.bairro}`)
+  const handleCreateFamily = () => {
+    if (memberInputs.length) {
+      memberInputs.map((member: any) => {
+        if (member.nome == "" || undefined || member.data_nascimento == "" || undefined) {
+          openNotification(
+            "error",
+            "Erro ao criar a família",
+            "topRight",
+            "Os membros da família não foram preenchidos",
+          )
+          return
+        }
       })
     }
+    if (!memberInputs.length) {
+      openNotification("error", "Erro ao criar a família", "topRight", "Uma família deve possuir ao menos um membro")
+      return
+    }
+
+    const data = {
+      endereco: form.getFieldValue("endereco"),
+      observacao: form.getFieldValue("observacao"),
+      renda_percapita: Number(form.getFieldValue("renda_percapita")),
+      data_ultima_assistencia: form.getFieldValue("data_ultima_assistencia"),
+      id_naasp: naaspId,
+      beneficios: benefitInputs,
+      membros_familia: memberInputs,
+    }
+
+    dispatch(createFamily(data))
+    console.log(data)
+    // handleOnRestet()
   }
 
-  const handleOnRestet = () => {
-    form.resetFields()
+  const addBenefitInputs = () => {
+    setBenefitInputs([...benefitInputs, { nome_beneficio: "", data_recebimento: "" }])
+  }
+  const removeBenefitInputs = (index: number) => {
+    const newInputs = [...benefitInputs]
+    newInputs.splice(index, 1)
+    setBenefitInputs(newInputs)
+  }
+
+  const addMembersInputs = () => {
+    setMemberInputs([...memberInputs, { data_nascimento: "", nome: "", nome_mae: "" }])
+  }
+  const removeMemberInputs = (index: number) => {
+    const newInputs = [...memberInputs]
+    newInputs.splice(index, 1)
+    setMemberInputs(newInputs)
+  }
+
+  const handleBenefitInputChange = (
+    index: number,
+    event: ChangeEvent<HTMLInputElement>,
+    field: keyof BenefitsInputData,
+  ) => {
+    const newInputs = [...benefitInputs]
+    newInputs[index][field] = event.target.value
+    setBenefitInputs(newInputs)
+  }
+
+  const handleMemberInputChange = (
+    index: number,
+    event: ChangeEvent<HTMLInputElement>,
+    field: keyof MembersInputData,
+  ) => {
+    const newInputs = [...memberInputs]
+    newInputs[index][field] = event.target.value
+    setMemberInputs(newInputs)
+  }
+
+  const handleBenefitDateChange = (index: number, date: any) => {
+    const newInputs = [...benefitInputs]
+    newInputs[index].data_recebimento = date ? date.toISOString() : null
+    setBenefitInputs(newInputs)
+  }
+  const handleMemberDateChange = (index: number, date: any) => {
+    const newInputs = [...memberInputs]
+    newInputs[index].data_nascimento = date ? date.toISOString() : null
+    setMemberInputs(newInputs)
   }
 
   const handleDate = (date: any) => {
@@ -130,6 +202,18 @@ export const FamilyRegisterIndex = () => {
     form.setFieldValue("observacao", event.target.value)
   }
 
+  const handleNaasp = (value: any) => {
+    setNaaspId(value)
+  }
+
+  const handleOnRestet = () => {
+    form.resetFields()
+  }
+
+  useEffect(() => {
+    dispatch(getAllNaasps())
+  }, [])
+
   return (
     <div className='main-div'>
       <title>Cadastro de Família</title>
@@ -137,7 +221,16 @@ export const FamilyRegisterIndex = () => {
       <Form form={form} onFinish={handleCreateFamily}>
         <Row gutter={[20, 20]} align={"middle"}>
           <Col xs={24} sm={7} md={10}>
-            <InputText placeholder='CEP' name='cep' type='number' onChange={handleOnChangeCep} maxLength={8} required />
+            <InputText
+              placeholder='CEP'
+              name='cep'
+              type='number'
+              onChange={() => {
+                getAddresByCep(form)
+              }}
+              maxLength={8}
+              required
+            />
           </Col>
           <Col xs={24} sm={10} md={10}>
             <InputText placeholder='Endereço' name='endereco' required />
@@ -147,10 +240,11 @@ export const FamilyRegisterIndex = () => {
           </Col>
           <Col xs={24} sm={14} md={10}>
             <Select
-              style={{ width: "100%", marginBottom: "20px" }}
-              placeholder='NAASP Responsável'
               showSearch
+              placeholder='NAASP Responsável'
+              style={{ width: "100%", marginBottom: "20px" }}
               options={options}
+              onChange={handleNaasp}
             />
           </Col>
           <Col xs={24} sm={14} md={9}>
@@ -180,6 +274,104 @@ export const FamilyRegisterIndex = () => {
               onChange={handleObservation}
             />
           </Col>
+          <Col xs={24} sm={12} md={24}>
+            <Button
+              type='primary'
+              className='add-benefit-button'
+              onClick={() => {
+                addBenefitInputs()
+              }}
+            >
+              <DollarCircleOutlined className='icon-button' />
+              <span className='benefit-button-text'>Adicionar beneficios</span>
+            </Button>
+          </Col>
+
+          {benefitInputs.map((input, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              <Col xs={24} sm={24} md={24}>
+                <DatePicker
+                  placeholder='Data último recebimento *'
+                  format={"DD/MM/YYYY"}
+                  value={input.data_recebimento ? moment(input.data_recebimento) : null}
+                  onChange={(e: any) => handleBenefitDateChange(index, e)}
+                  style={{ width: "100%" }}
+                />
+              </Col>
+              <br />
+              <Col xs={24} sm={24} md={24}>
+                <InputText
+                  placeholder='Nome benefício *'
+                  style={{ marginRight: "10px" }}
+                  value={input.nome_beneficio}
+                  onChange={(e) => handleBenefitInputChange(index, e, "nome_beneficio")}
+                />
+              </Col>
+              <Button
+                type='primary'
+                className='remove-benefit-button'
+                onClick={() => {
+                  removeBenefitInputs(index)
+                }}
+              >
+                <TbTrash className='icon-button' />
+              </Button>
+            </div>
+          ))}
+
+          <br />
+          <Col xs={24} sm={12} md={24}>
+            <Button
+              type='primary'
+              className='add-member-button'
+              onClick={() => {
+                addMembersInputs()
+              }}
+            >
+              <PiPersonArmsSpread className='icon-button' />
+              <span className='member-button-text'>Adicionar membros</span>
+            </Button>
+          </Col>
+
+          {memberInputs.map((input, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              <Col xs={24} sm={24} md={24}>
+                <DatePicker
+                  placeholder='Data de nascimento *'
+                  format={"DD/MM/YYYY"}
+                  value={input.data_nascimento ? moment(input.data_nascimento) : null}
+                  onChange={(e: any) => handleMemberDateChange(index, e)}
+                  style={{ width: "100%" }}
+                />
+              </Col>
+              <br />
+              <Col xs={24} sm={24} md={24}>
+                <InputText
+                  value={input.nome}
+                  onChange={(e) => handleMemberInputChange(index, e, "nome")}
+                  placeholder='Nome do Morador *'
+                  style={{ marginRight: "10px" }}
+                />
+              </Col>
+              <Col xs={24} sm={24} md={24}>
+                <InputText
+                  value={input.nome_mae}
+                  onChange={(e) => handleMemberInputChange(index, e, "nome_mae")}
+                  placeholder='Nome da Mãe'
+                  style={{ marginRight: "10px" }}
+                />
+              </Col>
+              <Button
+                type='primary'
+                className='remove-member-button'
+                onClick={() => {
+                  removeMemberInputs(index)
+                }}
+              >
+                <TbTrash className='icon-button' />
+              </Button>
+            </div>
+          ))}
 
           <div className='action-buttons'>
             <Col xs={24} sm={12} md={12}>

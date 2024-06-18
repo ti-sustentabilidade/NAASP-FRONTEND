@@ -1,5 +1,4 @@
 import { Button, Col, Form, Row } from "antd"
-import axios from "axios"
 
 import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
@@ -9,6 +8,7 @@ import { createNaasp } from "../../store/app/naasps/naasp"
 import { selectNaaspStatus } from "../../store/app/naasps/naasp-selector"
 import { StatusEnum } from "../../store/enums/StatusEnum"
 import { AppDispatch } from "../../store/store"
+import getAddresByCep from "../../utils/get-address"
 import "./styles.css"
 
 export const NaaspRegisterIndex = () => {
@@ -31,17 +31,6 @@ export const NaaspRegisterIndex = () => {
     handleOnRestet()
   }
 
-  const handleOnChangeCep = async () => {
-    const cep = form.getFieldValue("cep")
-
-    if (cep.length == 8) {
-      await axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((response: any) => {
-        console.log(response)
-        form.setFieldValue("endereco", `${response.data.logradouro} - ${response.data.bairro}`)
-      })
-    }
-  }
-
   const handleOnRestet = () => {
     form.resetFields()
   }
@@ -53,7 +42,15 @@ export const NaaspRegisterIndex = () => {
       <Form form={form} onFinish={handleCreateNaasp}>
         <Row gutter={[20, 20]} align={"middle"}>
           <Col xs={24} sm={7} md={5}>
-            <InputText placeholder='CEP' name='cep' type='number' onChange={handleOnChangeCep} maxLength={8} />
+            <InputText
+              placeholder='CEP'
+              name='cep'
+              type='number'
+              onChange={() => {
+                getAddresByCep(form)
+              }}
+              maxLength={8}
+            />
           </Col>
           <Col xs={24} sm={10} md={10}>
             <InputText placeholder='Endereço' name='endereco' required />

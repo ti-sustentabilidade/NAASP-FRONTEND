@@ -15,6 +15,26 @@
   font-family: "DM Sans", sans-serif;
 }
 
+.add-member-button {
+  background-color: #94d4a8;
+  color: black;
+}
+.remove-member-button {
+  margin-left: 10px;
+  background-color: red;
+  color: white;
+}
+
+.add-benefit-button {
+  background-color: #94d4a8;
+  color: black;
+}
+.remove-benefit-button {
+  margin-left: 10px;
+  background-color: red;
+  color: white;
+}
+
 .print-button {
   width: 200px;
   height: 35px;
