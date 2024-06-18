@@ -32,7 +32,7 @@ export const getAllNaasps = createAsyncThunk("naasp/getAll", async (_, { dispatc
       dispatch(setStatus(StatusEnum.FULFILLED))
     })
     .catch((error: any) => {
-      openNotification("error", "Erro ao realizar a busca", "topRight", error.message)
+      openNotification("error", "Erro ao realizar a busca", "topRight", error.response.message)
       dispatch(setStatus(StatusEnum.REJECTED))
       console.log(error.message)
     })

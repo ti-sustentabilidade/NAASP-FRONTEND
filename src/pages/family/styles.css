@@ -1,7 +1,9 @@
+.main-div {
+  margin-left: 30px;
+}
+
 .action-buttons {
   display: flex;
-  /* flex-direction: column; */
-  padding-top: 20px;
 }
 .action-buttons > Col > Button {
   border-radius: 10px;
@@ -13,11 +15,19 @@
   font-family: "DM Sans", sans-serif;
 }
 
-@media (min-width: 575px) {
-  .main-div {
-    margin-left: 30px;
-  }
+.print-button {
+  width: 200px;
+  height: 35px;
 }
+.save-button {
+  width: 100px;
+  height: 35px;
+}
+.clear-button {
+  width: 100px;
+  height: 35px;
+}
+
 @media (max-width: 575px) {
   .main-div {
     margin-left: 20px;
@@ -29,7 +39,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 20px; */
-    /* padding-top: 20px; */
+  }
+
+  .print-button {
+    width: 400px;
+    height: 40px;
+  }
+  .save-button {
+    width: 400px;
+    height: 40px;
+  }
+  .clear-button {
+    width: 400px;
+    height: 40px;
   }
 }

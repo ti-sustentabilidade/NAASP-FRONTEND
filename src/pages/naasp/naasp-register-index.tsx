@@ -79,7 +79,7 @@ export const NaaspRegisterIndex = () => {
               <Button
                 type='primary'
                 htmlType='submit'
-                style={{ width: "120px", height: "40px" }}
+                className='save-button'
                 loading={loading == StatusEnum.PENDING ? true : false}
               >
                 <BiSave className='icon-button' />
@@ -88,7 +88,7 @@ export const NaaspRegisterIndex = () => {
             </Col>
             <br />
             <Col xs={12} sm={12} md={12}>
-              <Button htmlType='button' onClick={handleOnRestet} style={{ width: "120px", height: "40px" }}>
+              <Button htmlType='button' onClick={handleOnRestet} className='clear-button'>
                 <MdCleaningServices className='icon-button' />
                 <span className='action-buttons-text'>Limpar</span>
               </Button>

@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Form, Row } from "antd"
+import { Button, Col, DatePicker, Form, Row, Select } from "antd"
 import TextArea from "antd/es/input/TextArea"
 import axios from "axios"
 import * as pdfMake from "pdfmake/build/pdfmake"
@@ -8,15 +8,18 @@ import { BiSave } from "react-icons/bi"
 import { MdCleaningServices } from "react-icons/md"
 import { PiPrinter } from "react-icons/pi"
 //import { useDispatch } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import InputText from "../../components/form/input-text"
 import { createFamily } from "../../store/app/family/family"
 import { AppDispatch } from "../../store/store"
 import "./styles.css"
+import { selectNaaspOptions } from "../../store/app/naasps/naasp-selector"
 
 export const FamilyRegisterIndex = () => {
   const [form] = Form.useForm()
   const dispatch = useDispatch<AppDispatch>()
+
+  const options = useSelector(selectNaaspOptions)
 
   const pdfFonts = {
     Roboto: {
@@ -128,7 +131,7 @@ export const FamilyRegisterIndex = () => {
   }
 
   return (
-    <div style={{ marginLeft: "30px" }}>
+    <div className='main-div'>
       <title>Cadastro de Família</title>
       <h1 className='title'>Cadastramento de Famílias</h1>
       <Form form={form} onFinish={handleCreateFamily}>
@@ -143,17 +146,28 @@ export const FamilyRegisterIndex = () => {
             <InputText placeholder='Número' name='number' />
           </Col>
           <Col xs={24} sm={14} md={10}>
-            <InputText placeholder='NAASP Responsável' name='responsible_naasp' required />
-          </Col>
-          <Col xs={24} sm={14} md={5}>
-            <InputText placeholder='Renda total da Família' name='renda_percapita' type='number' required />
+            <Select
+              style={{ width: "100%", marginBottom: "20px" }}
+              placeholder='NAASP Responsável'
+              showSearch
+              options={options}
+            />
           </Col>
           <Col xs={24} sm={14} md={9}>
+            <InputText
+              placeholder='Renda total da Família'
+              addonBefore={"R$"}
+              name='renda_percapita'
+              type='number'
+              required
+            />
+          </Col>
+          <Col xs={24} sm={14} md={5}>
             <DatePicker
               placeholder='Data da última assistência'
               name='data_ultima_assistencia'
               format={"DD/MM/YYYY"}
-              style={{ width: "210px", marginBottom: "25px" }}
+              style={{ width: "100%", marginBottom: "25px" }}
               onChange={handleDate}
               required
             />
@@ -168,11 +182,10 @@ export const FamilyRegisterIndex = () => {
           </Col>
 
           <div className='action-buttons'>
-            <Col xs={24} sm={24} md={12}>
+            <Col xs={24} sm={12} md={12}>
               <Button
                 type='primary'
-                className='buttons'
-                style={{ width: "200px", height: "35px", display: "flex", justifyContent: "space-evenly" }}
+                className='print-button'
                 onClick={() => {
                   handleGeneratePdf()
                 }}
@@ -182,23 +195,15 @@ export const FamilyRegisterIndex = () => {
               </Button>
             </Col>
             <br />
-            <Col xs={24} sm={24} md={7}>
-              <Button
-                type='primary'
-                htmlType='submit'
-                style={{ width: "100px", height: "35px", display: "flex", justifyContent: "space-evenly" }}
-              >
+            <Col xs={24} sm={8} md={7}>
+              <Button type='primary' htmlType='submit' className='save-button'>
                 <BiSave className='icon-button' />
                 <span className='action-buttons-text'>Salvar</span>
               </Button>
             </Col>
             <br />
-            <Col xs={24} sm={24} md={3}>
-              <Button
-                htmlType='button'
-                onClick={handleOnRestet}
-                style={{ width: "100px", height: "35px", display: "flex", justifyContent: "space-evenly" }}
-              >
+            <Col xs={24} sm={8} md={3}>
+              <Button htmlType='button' onClick={handleOnRestet} className='clear-button'>
                 <MdCleaningServices className='icon-button' />
                 <span className='action-buttons-text'>Limpar</span>
               </Button>

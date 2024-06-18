@@ -32,12 +32,7 @@ function LoginIndex() {
     const isPasswordValid = passwordRegex.test(passwordField)
 
     if (!isPasswordValid) {
-      openNotification(
-        "error",
-        "Senha Inválida",
-        "topRight",
-        "Mínimo de 6 caracteres, pelo menos uma letra, um número e um caractere especial",
-      )
+      openNotification("error", "Senha Inválida", "topRight", "Mínimo de 6 caracteres, pelo menos uma letra")
 
       setIsLoading(false)
       return

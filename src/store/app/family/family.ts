@@ -43,17 +43,17 @@ export const searchFamily = createAsyncThunk("family/searchFamily", async (data:
 
   const url =
     API_Routes.NAASP.family.search +
-    // `?nome=Membro1 sobrenome&nome_mae=mae&data_nascimento=${data.data_nascimento}`
     `?nome=${data.nome}&data_nascimento=${data.data_nascimento}${data.nome_mae ? `&nome_mae=${data.nome_mae}` : ""}`
 
   await NAASP_API.get(url)
     .then(async (response: any) => {
-      await dispatch(setFamily(response.data))
+      await dispatch(setFamily([response.data]))
+      console.log(response.data)
       dispatch(setStatus(StatusEnum.FULFILLED))
     })
     .catch((error: any) => {
-      openNotification("error", "Erro ao realizar a busca", "topRight", error.message)
+      openNotification("error", "Erro ao realizar a busca", "topRight", error.response.data)
       dispatch(setStatus(StatusEnum.REJECTED))
-      console.log(error.message)
+      console.log(error)
     })
 })
